@@ -6,4 +6,4 @@ from .models import Good
 
 def index(request):
     goods = Good.objects.all()
-    return render(request, 'testpage.html', {'goods': goods})
+    return render(request, 'goods.html', {'goods': goods})

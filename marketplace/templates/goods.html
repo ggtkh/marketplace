@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" >
+    <title>Товари</title>
+    <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
+    <link rel="icon" href="{% static 'marketplace/icon.png' %}" type="image/png">
+</head>
+<body class ="body">
+    <header class="navig">
+    <a href="main_page.html"><h1>Магазин</h1></a>
+    <p>Найкращі товари по смішним цінам!</p>
+    <nav>
+        <a href="main_page.html">Головна</a> |
+        <a href="goods.html">Товари</a> |
+        <a href="about_us.html">Про нас</a> 
+    </nav>
+    </header>
+    <section class="filters">
+        <div><b>Фільтри</b> </div><br>
+        Виробник:<br>
+        <div>
+            <ul >
+                <li>
+                    <input type="checkbox" id="manufacturer1">
+                    <label for="manufacturer1">ASUS</label><br>
+                </li>
+                <li>
+                    <input type="checkbox" id="manufacturer2">
+                    <label for="manufacturer2">ACER</label><br>
+                </li>
+                <li>
+                    <input type="checkbox" id="manufacturer3">
+                    <label for="manufacturer3">AMD</label><br>
+                </li>
+                <li>
+                    <input type="checkbox" id="manufacturer4">
+                    <label for="manufacturer4">MSI</label><br>
+                </li>
+            </ul>
+            
+        </div>
+        <div>
+            <label for="price">Ціна</label><br>
+            <form oninput="result.value=slider.value">
+            <input type="range" id="slider" name="slider" min="0" max="100000" value="0">
+            <output name="result" for="slider">0</output>
+            </form>
+        </div>
+        
+
+    </section>
+    <div class ="content2">
+Услуги (тут уже будут товары-услуги хз лол)
+    </div>
+
+</body>
+
+
+
+
+
+</html>
