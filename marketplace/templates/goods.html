@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -9,53 +10,59 @@
     <link rel="icon" href="{% static 'marketplace/icon.png' %}" type="image/png">
 </head>
 <body class ="body">
-    <header class="navig">
-    <a href="main_page.html"><h1>Магазин</h1></a>
-    <p>Найкращі товари по смішним цінам!</p>
-    <nav>
-        <a href="main_page.html">Головна</a> |
-        <a href="goods.html">Товари</a> |
-        <a href="about_us.html">Про нас</a> 
-    </nav>
-    </header>
-    <section class="filters">
-        <div><b>Фільтри</b> </div><br>
-        Виробник:<br>
-        <div>
-            <ul >
-                <li>
-                    <input type="checkbox" id="manufacturer1">
-                    <label for="manufacturer1">ASUS</label><br>
-                </li>
-                <li>
-                    <input type="checkbox" id="manufacturer2">
-                    <label for="manufacturer2">ACER</label><br>
-                </li>
-                <li>
-                    <input type="checkbox" id="manufacturer3">
-                    <label for="manufacturer3">AMD</label><br>
-                </li>
-                <li>
-                    <input type="checkbox" id="manufacturer4">
-                    <label for="manufacturer4">MSI</label><br>
-                </li>
-            </ul>
-            
-        </div>
-        <div>
-            <label for="price">Ціна</label><br>
-            <form oninput="result.value=slider.value">
-            <input type="range" id="slider" name="slider" min="0" max="100000" value="0">
-            <output name="result" for="slider">0</output>
-            </form>
-        </div>
-        
-
-    </section>
-    <div class ="content2">
-Услуги (тут уже будут товары-услуги хз лол)
+    <div class="navig">
+    <a href={% url 'index' %}><h1>Магазин</h1></a>
+        <p>Найкращі товари по смішним цінам!</p>
+        <nav>
+            <a href="main_page.html">Головна</a> |
+            <a href="goods.html">Товари</a> |
+            <a href="about_us.html">Про нас</a> 
+        </nav>
     </div>
+        <section class="filters">
+            <div><b>Фільтри</b> </div><br>
+            Виробник:<br>
+            <form method="post">
+            <div>
+                {% for manufacturer in manufacturers %}  
+                <input type="checkbox" id="{{ manufacturer }}" name="selected_">
+                <label for="{{ manufacturer }}"> {{manufacturer.upper}} </label><br>
+                
+                {% endfor %}
+            </div>
+            <div>
+                <label for="price">Ціна:</label><br>
+                <form oninput="result.value=slider.value">
+                <input type="range" id="slider" name="slider" min="0" max="100000" value="0">
+                <output name="result" for="slider">0</output>
+            </div>
+            Діагональ екрану:<br>
+            <div>
+                {% for ips in ipses %}  
+                <input type="checkbox" id="{{ ips }}" name="selected_">
+                
+                <label for="{{ ips }}"> {{ ips }}" </label><br>
+                
+                {% endfor %}
+            </div>
+            </form>
 
+        </section>
+        <div class ="content2">
+        {% for good in goods %}
+            <div class='goods'>
+                <img src="{{good.main_picture}}" alt="yo mama" width='210px'><br>
+
+                <h5> {{ good.split_title|linebreaksbr }} </h5>
+                <h3 class='price'> {{good.price}} ₴ </h3>
+                {% comment %} {% if not good.description %}
+                    <p> {{good.title}} </p>
+                {% else %}
+                    <p> {{good.description}} </p>
+                {% endif %} {% endcomment %}
+            </div>
+        {% endfor %}
+        </div>
 </body>
 
 

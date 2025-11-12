@@ -1,0 +1,11 @@
+{% extends "goods.html" %}
+
+{% block navbar %}
+    <a href={% url 'index' %}><h1>Магазин</h1></a>
+        <p>Найкращі товари по смішним цінам!</p>
+        <nav>
+            <a href="main_page.html">Головна</a> |
+            <a href="goods.html">Товари</a> |
+            <a href="about_us.html">Про нас</a> 
+        </nav>
+{% endblock %}

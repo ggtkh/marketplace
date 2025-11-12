@@ -7,9 +7,16 @@
 </head>
 <body>
     {% for good in goods %}
-    <p> {{good.title}}, ${{good.price}} </p>
-    <img src="{{good.main_picture}}" alt="yo mama">
+        <p> {{good.title}}, ${{good.price}} </p>
+        {% if not good.description %}
+            <p> {{good.title}} </p>
+        {% else %}
+            <p> {{good.description}} </p>
+        {% endif %}
+        
+        
+        <img src="{{good.main_picture}}" alt="yo mama" width='300px'><br>
     {% endfor %}
-    <input type="range" id="price" min="0" max="100000">
+    {% comment %} <input type="range" id="price" min="0" max="100000" > {% endcomment %}
 </body>
 </html>

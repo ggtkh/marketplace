@@ -20,19 +20,24 @@ p{
     background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%) no-repeat center center fixed;
 }
 .content{
-    max-width: 1200px;
+    max-width: 90%;
     margin: 20px auto;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.main-content{
+    max-width: 90%;
+    border-radius: 10px;
+}
 .content2{
-    display: block;
-    width: 70%;
+    display: inline-block;
     max-width: 70%;
+    margin-right: 0%;
+    width: 70%;
     flex: right;
-    margin-left: 28%;
+    margin-left: 25%;
     padding: 20px ;
     margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -54,4 +59,10 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+.goods {
+    display: inline-block;
+    background-color: white;
+    border: wheat;
+    vertical-align: top;
 }
