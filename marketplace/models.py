@@ -22,12 +22,14 @@ class Good(models.Model):
     pictures_list = models.JSONField(default=list, blank=True)
     hover_picture = models.URLField(blank=True, null=True)
     is_available = models.BooleanField()
-    characteristics = models.JSONField(default={"IPS": '0"',
+    characteristics = models.JSONField(default={"IPS": '0',
                                                 "CPU": "",
                                                 "RAM": "0GB",
                                                 "SSD": "0GB"})
     tags = models.JSONField(default=list)
     reviews = models.JSONField(default=list, blank=True)
+    # cut_ips = models.CharField(default=None, blank=True)
+    
 
     def split_title(self):
         if len(self.title) < 30:
@@ -59,8 +61,11 @@ class Good(models.Model):
         if self.manufacturer and self.manufacturer not in saved_chars.manufacturers:
             saved_chars.manufacturers.append(self.manufacturer)
 
-        if int(self.characteristics['IPS'][0:2]) not in saved_chars.ipses:
-            saved_chars.ipses.append(int(self.characteristics['IPS'][0:2]))
+        # if len(self.characteristics['IPS']) > 2:
+        #     self.characteristics['IPS'] = self.characteristics['IPS'][0:2]
+
+        if self.characteristics['IPS'][0:2] not in saved_chars.ipses:
+            saved_chars.ipses.append(self.characteristics['IPS'][0:2])
         
         cpu = self.characteristics['CPU']
         if cpu not in saved_chars.cpus:

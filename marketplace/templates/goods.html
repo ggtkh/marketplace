@@ -24,73 +24,88 @@
             
             <div><b>Фільтри</b> </div><br>
             Виробник:<br>
-            <form method="post">
-            
+            <form method="POST" action="">
+                {% csrf_token %}
+
                 {% for manufacturer in manufacturers %}  
-                <input type="checkbox" id="{{ manufacturer }}" name="selected_">
+                <input type="checkbox" id="{{ manufacturer }}" name="manufacturer" value="{{ manufacturer }}"
+                {% if manufacturer in selected_m %}checked{% endif %} >
+                    
                 <label for="{{ manufacturer }}"> {{manufacturer.upper}} </label><br>
                 
                 {% endfor %}
             <div>
                 <label for="price">Ціна:</label><br>
-                <form oninput="result.value=slider.value">
-                <input type="range" id="slider" name="slider" min="0" max="100000" value="0">
-                <output name="result" for="slider">0</output>
+                <input type="range" id="slider" name="slider" min="0" max="100000" value="{{ selected_price|default:0 }}"
+                oninput="result.value=this.value">
+                <output name="result" for="slider">{{ selected_price|default:0 }}</output>
             </div>
+            <br>
             Діагональ екрану:<br>
             <div>
                 {% for ips in ipses %}  
-                <input type="checkbox" id="{{ ips }}" name="selected_">
+                <input type="checkbox" id="{{ ips }}" name="ips" value="{{ ips }}"
+                {% if ips in selected_i %}checked{% endif %} >
                 
                 <label for="{{ ips }}"> {{ ips }}" </label><br>
                 
                 {% endfor %}
             </div>
+            <br>
             Процесори:<br>
             <div>
                 {% for cpu in cpus %}  
-                <input type="checkbox" id="{{ cpu }}" name="selected_">
+                <input type="checkbox" id="{{ cpu }}" name="cpu" value="{{ cpu }}"
+                {% if cpu in selected_c %}checked{% endif %} >
                 
-                <label for="{{ cpu }}"> {{ cpu }}" </label><br>
+                <label for="{{ cpu }}"> {{ cpu }} </label><br>
                 
                 {% endfor %}
             </div>
+            <br>
             Оперативна пам'ять:<br>
             <div>
                 {% for ram in rams %}  
-                <input type="checkbox" id="{{ ram }}" name="selected_">
+                <input type="checkbox" id="{{ ram }}" name="ram" value="{{ ram }}"
+                {% if ram in selected_r %}checked{% endif %} >
                 
-                <label for="{{ ram }}"> {{ ram }}" </label><br>
+                <label for="{{ ram }}"> {{ ram }} </label><br>
                 
                 {% endfor %}
             </div>
+            <br>
             SSD:<br>
             <div>
                 {% for ssd in ssds %}  
-                <input type="checkbox" id="{{ ssd }}" name="selected_">
+                <input type="checkbox" id="{{ ssd }}" name="ssd" value="{{ ssd }}"
+                {% if ssd in selected_s %}checked{% endif %}>
                 
-                <label for="{{ ssd }}"> {{ ssd }}" </label><br>
+                <label for="{{ ssd }}"> {{ ssd }} </label><br>
                 
                 {% endfor %}
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="Застосувати Фільтри">
             </div>
             </form>
        
         </div>
-         <div class ="content2">
-        {% for good in goods %}
-            <div class='goods'>
-                <img src="{{good.main_picture}}" alt="yo mama" width='210px'><br>
+        <div class ="content2">
+        {% if goods %}
+            {% for good in goods %}
+                <div class='goods'>
+                    <img src="{{good.main_picture}}" alt="yo mama" width='210px'><br>
 
-                <h5> {{ good.split_title|linebreaksbr }} </h5>
-                <h3 class='price'> {{good.price}} ₴ </h3>
-                {% comment %} {% if not good.description %}
-                    <p> {{good.title}} </p>
-                {% else %}
-                    <p> {{good.description}} </p>
-                {% endif %} {% endcomment %}
-            </div>
-            
-        {% endfor %}
+                    <h5> {{ good.split_title|linebreaksbr }} </h5>
+                    <h3 class='price'> {{good.price}} ₴ </h3>
+                </div>
+                
+            {% endfor %}
+        {% else %}
+            <h2>Товарів не знайдено</h2>
+        {% endif %}
+        </div>
         </section>
 </body>
 
