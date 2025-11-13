@@ -33,11 +33,9 @@ p{
 }
 .content2{
     display: inline-block;
-    max-width: 70%;
-    margin-right: 0%;
-    width: 70%;
-    flex: right;
-    margin-left: 25%;
+    flex: 1;
+    /* width: 80% ;  */
+    min-width: 84.08%;
     padding: 20px ;
     margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -46,14 +44,16 @@ p{
 }
 .filters{
     position: relative;
-    display: block;
-    width: 20%;
+    display: inline-block;
+    vertical-align: top;
+    /* width: 14%; */
     padding: 20px;
     margin-top: 10px ;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow-y: scroll;
+    flex: 0 0 15%;
 
 }
 ul {
@@ -69,3 +69,9 @@ ul {
     border-radius: 10px;
     padding: 5px;
 }
+.maingage{
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+

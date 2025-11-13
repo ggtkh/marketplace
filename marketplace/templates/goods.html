@@ -19,17 +19,18 @@
             <a href="about_us.html">Про нас</a> 
         </nav>
     </div>
-        <section class="filters">
+        <section class="mainpage">
+        <div class="filters">
+            
             <div><b>Фільтри</b> </div><br>
             Виробник:<br>
             <form method="post">
-            <div>
+            
                 {% for manufacturer in manufacturers %}  
                 <input type="checkbox" id="{{ manufacturer }}" name="selected_">
                 <label for="{{ manufacturer }}"> {{manufacturer.upper}} </label><br>
                 
                 {% endfor %}
-            </div>
             <div>
                 <label for="price">Ціна:</label><br>
                 <form oninput="result.value=slider.value">
@@ -73,9 +74,9 @@
                 {% endfor %}
             </div>
             </form>
-
-        </section>
-        <div class ="content2">
+       
+        </div>
+         <div class ="content2">
         {% for good in goods %}
             <div class='goods'>
                 <img src="{{good.main_picture}}" alt="yo mama" width='210px'><br>
@@ -88,8 +89,9 @@
                     <p> {{good.description}} </p>
                 {% endif %} {% endcomment %}
             </div>
+            
         {% endfor %}
-        </div>
+        </section>
 </body>
 
 
