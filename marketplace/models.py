@@ -64,20 +64,29 @@ class Good(models.Model):
         # if len(self.characteristics['IPS']) > 2:
         #     self.characteristics['IPS'] = self.characteristics['IPS'][0:2]
 
-        if self.characteristics['IPS'][0:2] not in saved_chars.ipses:
+        if len(self.characteristics['IPS']) > 3 :
+            if self.characteristics['IPS'][2] == '.':
+                if self.characteristics['IPS'][0:4] not in saved_chars.ipses:
+                    saved_chars.ipses.append(self.characteristics['IPS'][0:4])
+
+        elif self.characteristics['IPS'][0:2] not in saved_chars.ipses:
             saved_chars.ipses.append(self.characteristics['IPS'][0:2])
+        
         
         cpu = self.characteristics['CPU']
         if cpu not in saved_chars.cpus:
             saved_chars.cpus.append(cpu)
 
+
         ram = self.characteristics['RAM']
         if ram not in saved_chars.rams:
             saved_chars.rams.append(ram)
 
+
         ssd = self.characteristics['SSD']
         if ssd not in saved_chars.ssds:
             saved_chars.ssds.append(ssd)
+
 
         saved_chars.save()
 

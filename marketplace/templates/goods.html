@@ -11,11 +11,11 @@
 </head>
 <body class ="body">
     <div class="navig">
-    <a href={% url 'index' %}><h1>Магазин</h1></a>
+    <a href={% url 'goods' %}><h1>Магазин</h1></a>
         <p>Найкращі товари по смішним цінам!</p>
         <nav>
             <a href="main_page.html">Головна</a> |
-            <a href="goods.html">Товари</a> |
+            <a href={% url 'goods' %}>Товари</a> |
             <a href="about_us.html">Про нас</a> 
         </nav>
     </div>
@@ -95,9 +95,9 @@
         {% if goods %}
             {% for good in goods %}
                 <div class='goods'>
-                    <img src="{{good.main_picture}}" width='210px'><br>
+                    <a href={% url 'single_good' good.id %}><img src="{{good.main_picture}}" width='215px'><br></a>
 
-                    <h5> {{ good.split_title|linebreaksbr }} </h5>
+                    <a href={% url 'single_good' good.id %}><h5> {{ good.split_title|linebreaksbr }} </h5></a>
                     <h3 class='price'> {{good.price}} ₴ </h3>
                 </div>
                 

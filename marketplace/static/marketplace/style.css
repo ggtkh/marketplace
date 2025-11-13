@@ -6,7 +6,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
 }
-a{
+.navig a{
     color: white;
     text-decoration: none;
     margin: 0 15px;
@@ -35,7 +35,9 @@ p{
     display: inline-block;
     flex: 1;
     /* width: 80% ;  */
-    min-width: 84.08%;
+    min-width: 76.30%;
+    max-width: 76.30%;
+    /* min-width: 80.04%; */
     padding: 20px ;
     margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -46,6 +48,7 @@ p{
     position: relative;
     display: inline-block;
     vertical-align: top;
+    max-height: 460px;
     /* width: 14%; */
     padding: 20px;
     margin-top: 10px ;
@@ -67,11 +70,40 @@ ul {
     border: black;
     vertical-align: top;
     border-radius: 10px;
+    margin-bottom: 7px;
     padding: 5px;
+    min-height: 300px;
+}
+.goods a{
+    text-decoration: none;
+    color: black;
 }
 .maingage{
     display: flex;
     align-items: flex-start;
     width: 100%;
 }
-
+.voda{
+    display: inline-block;
+    flex: 1;
+    min-width: 96.7%;
+    padding: 20px ;
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.good img {
+    float: left;
+    display: inline;
+    background-color: white;
+    border: black;
+    vertical-align: top;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    padding: 5px;
+    min-height: 300px;
+}
+.good h3{
+    /* тут надо сделать, шоб текст красивенько был */
+}

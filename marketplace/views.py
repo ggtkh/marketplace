@@ -72,3 +72,8 @@ def goods(request):
                                             'cpus': cpus,
                                             'rams': rams,
                                             'ssds': ssds,})
+    
+
+def single_good(request, good_id):
+    good = Good.objects.get(id=good_id)
+    return render(request, 'single_good.html', {'good': good},)

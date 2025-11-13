@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
+    <link rel="icon" href="{% static 'marketplace/icon.png' %}" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class='body'>
+    <div class='navig'>
+        <a href={% url 'index' %}><h1>Магазин</h1></a>
+        <p>Найкращі товари по смішним цінам!</p>
+        <nav>
+            <a href="main_page.html">Головна</a> |
+            <a href={% url 'goods' %}>Товари</a> |
+            <a href="about_us.html">Про нас</a> 
+        </nav>
+    </div>
+    <section class='mainpage'>
+        <div class='voda'>
+            <div class='good'>
+                <img src={{good.main_picture}} width='350px'>
+                <h3> {{ good.title }} </h3>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
