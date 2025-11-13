@@ -5,10 +5,14 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
-class Good(models.Model):
-    manufacturers_list = []
-    ipses_list = []
+class SavedCharacteristics(models.Model):
+    ipses = models.JSONField(default=list, blank=True)
+    cpus = models.JSONField(default=list, blank=True)
+    rams = models.JSONField(default=list, blank=True)
+    ssds = models.JSONField(default=list, blank=True)
+    manufacturers = models.JSONField(default=list, blank=True)
 
+class Good(models.Model):
     title = models.CharField(max_length=255, default="Some Piece of Scrap")
     description = models.CharField(max_length=500, blank=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
@@ -38,6 +42,8 @@ class Good(models.Model):
                 else:
                     lines.append(current)
                     current = word + " "
+                if len(lines) == 2:
+                    return "\n".join(lines) + "..."
             if current:
                 lines.append(current)
             return "\n".join(lines)
@@ -45,17 +51,34 @@ class Good(models.Model):
     def save(self, *args, **kwargs):
         if not self.hover_picture:
             self.hover_picture = self.main_picture
+
         super().save(*args, **kwargs)
 
-        if self.manufacturer not in Good.manufacturers_list:
-            Good.manufacturers_list.append(self.manufacturer)
+        saved_chars, created = SavedCharacteristics.objects.get_or_create(id=1)
 
-        if int(self.characteristics['IPS'][0:2]) not in Good.ipses_list:
-            Good.ipses_list.append(int(self.characteristics['IPS'][0:2]))
+        if self.manufacturer and self.manufacturer not in saved_chars.manufacturers:
+            saved_chars.manufacturers.append(self.manufacturer)
+
+        if int(self.characteristics['IPS'][0:2]) not in saved_chars.ipses:
+            saved_chars.ipses.append(int(self.characteristics['IPS'][0:2]))
         
+        cpu = self.characteristics['CPU']
+        if cpu not in saved_chars.cpus:
+            saved_chars.cpus.append(cpu)
+
+        ram = self.characteristics['RAM']
+        if ram not in saved_chars.rams:
+            saved_chars.rams.append(ram)
+
+        ssd = self.characteristics['SSD']
+        if ssd not in saved_chars.ssds:
+            saved_chars.ssds.append(ssd)
+
+        saved_chars.save()
+
+
     def __str__(self):
         return self.title
-    
 
 
 

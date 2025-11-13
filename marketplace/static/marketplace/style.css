@@ -45,7 +45,7 @@ p{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .filters{
-    position: fixed;
+    position: relative;
     display: block;
     width: 20%;
     padding: 20px;
@@ -53,6 +53,7 @@ p{
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
 
 }
 ul {
@@ -63,6 +64,8 @@ ul {
 .goods {
     display: inline-block;
     background-color: white;
-    border: wheat;
+    border: black;
     vertical-align: top;
+    border-radius: 10px;
+    padding: 5px;
 }

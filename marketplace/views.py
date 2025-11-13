@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Good
+from .models import Good, SavedCharacteristics
 
 # Create your views here.
 
@@ -15,8 +15,15 @@ def test_page(request):
 
 def goods(request):
     goods = Good.objects.all()
-    manufacturers = Good.manufacturers_list
-    ipses = Good.ipses_list
+    saved_chars = SavedCharacteristics.objects.get(id=1)
+    manufacturers = saved_chars.manufacturers
+    ipses = saved_chars.ipses
+    cpus = saved_chars.cpus
+    rams = saved_chars.rams
+    ssds = saved_chars.ssds
     return render(request, 'goods.html', {'goods': goods,
                                           'manufacturers': manufacturers,
-                                          'ipses': ipses,})
+                                          'ipses': ipses,
+                                          'cpus': cpus,
+                                          'rams': rams,
+                                          'ssds': ssds,})

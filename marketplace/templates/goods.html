@@ -45,6 +45,33 @@
                 
                 {% endfor %}
             </div>
+            Процесори:<br>
+            <div>
+                {% for cpu in cpus %}  
+                <input type="checkbox" id="{{ cpu }}" name="selected_">
+                
+                <label for="{{ cpu }}"> {{ cpu }}" </label><br>
+                
+                {% endfor %}
+            </div>
+            Оперативна пам'ять:<br>
+            <div>
+                {% for ram in rams %}  
+                <input type="checkbox" id="{{ ram }}" name="selected_">
+                
+                <label for="{{ ram }}"> {{ ram }}" </label><br>
+                
+                {% endfor %}
+            </div>
+            SSD:<br>
+            <div>
+                {% for ssd in ssds %}  
+                <input type="checkbox" id="{{ ssd }}" name="selected_">
+                
+                <label for="{{ ssd }}"> {{ ssd }}" </label><br>
+                
+                {% endfor %}
+            </div>
             </form>
 
         </section>
