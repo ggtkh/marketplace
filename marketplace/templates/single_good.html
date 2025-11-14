@@ -1,22 +1,21 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" >
+    <title>Головна</title>
     <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
     <link rel="icon" href="{% static 'marketplace/icon.png' %}" type="image/png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 </head>
-<body class='body'>
-    <div class='navig'>
-        <a href={% url 'index' %}><h1>Магазин</h1></a>
+<body class ="body">
+    <div class="navig">
+    <a href={% url 'goods' %}><h1>Магазин</h1></a>
         <p>Найкращі товари по смішним цінам!</p>
         <nav>
-            <a href="main_page.html">Головна</a> |
+            <a href={% url 'index' %}>Головна</a> |
             <a href={% url 'goods' %}>Товари</a> |
-            <a href="about_us.html">Про нас</a> 
+            <a href={% url 'about_us' %}>Про нас</a> 
         </nav>
     </div>
     <section class='mainpage'>

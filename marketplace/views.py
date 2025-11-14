@@ -6,12 +6,11 @@ from .models import Good, SavedCharacteristics
 
 
 def index(request):
-    goods = Good.objects.all()
-    return render(request, 'goods.html', {'goods': goods})
+    # goods = Good.objects.all()
+    return render(request, 'main_page.html', {})
 
-def test_page(request):
-    goods = Good.objects.all()
-    return render(request, 'testpage.html', {'goods': goods})
+def about_us(request):
+    return render(request, 'about_us.html', {})
 
 def goods(request):
     goods = Good.objects.all()
@@ -77,3 +76,4 @@ def goods(request):
 def single_good(request, good_id):
     good = Good.objects.get(id=good_id)
     return render(request, 'single_good.html', {'good': good},)
+

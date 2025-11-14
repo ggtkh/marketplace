@@ -1,22 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" >
-    <title>Про нас</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="icon.png" type="image/png">
+    <title>Головна</title>
+    <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
+    <link rel="icon" href="{% static 'marketplace/icon.png' %}" type="image/png">
 </head>
 <body class ="body">
-    <header class="navig">
-    <a href="main_page.html"><h1>Магазин</h1></a>
-    <p>Найкращі товари по смішним цінам!</p>
-    <nav>
-        <a href="main_page.html">Головна</a> |
-        <a href="goods.html">Товари</a> |
-        <a href="about_us.html">Про нас</a> 
-    </nav>
-    </header>
+    <div class="navig">
+    <a href={% url 'goods' %}><h1>Магазин</h1></a>
+        <p>Найкращі товари по смішним цінам!</p>
+        <nav>
+            <a href={% url 'index' %}>Головна</a> |
+            <a href={% url 'goods' %}>Товари</a> |
+            <a href={% url 'about_us' %}>Про нас</a> 
+        </nav>
+    </div>
     <div class ="content">
 Тут будет раздел про информацию о нас и нашу контору
     </div>
