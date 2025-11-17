@@ -35,8 +35,8 @@ p{
     display: inline-block;
     flex: 1;
     /* width: 80% ;  */
-    min-width: 76.30%;
-    max-width: 76.30%;
+    min-width: 76.2%;
+    max-width: 76.2%;
     /* min-width: 80.04%; */
     padding: 20px ;
     margin-top: 10px;
@@ -104,6 +104,79 @@ ul {
     padding: 5px;
     min-height: 300px;
 }
-.good h3{
-    /* тут надо сделать, шоб текст красивенько был */
+
+.btn {
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    /* font-size: 16px; */
+    font-weight: 600;
+    cursor: pointer;
+
+    /* Красивые эффекты */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+    transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .35);
+    filter: brightness(1.15); /* подсветка при наведении */
+}
+.btn:hover {
+    background-color: #45a049;  /* цвет при наведении */
+}
+
+.range-gradient {
+    -webkit-appearance: none;
+    width: 141px;
+    height: 7px;
+    border-radius: 5px;
+    background: #ddd;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+}
+
+/* Линия (фон) при активном изменении */
+.range-gradient:active {
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+}
+
+/* Стилизация ползунка (кружка) */
+.range-gradient::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: grab;
+}
+
+.range-gradient::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .35);
+}
+
+/* Firefox */
+.range-gradient::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: grab;
+}
+
+.range-gradient::-moz-range-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
 }

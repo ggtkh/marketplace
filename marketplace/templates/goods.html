@@ -35,10 +35,10 @@
                 
                 {% endfor %}
             <div>
-                <label for="price">Ціна:</label><br>
-                <input type="range" id="slider" name="slider" min="{{ min_price }}" max="{{ max_price }}" value="{{ selected_price|default:0 }}"
+                <label for="price">Ціна, грн:</label><br>
+                <input type="range" id="slider" class="range-gradient" name="slider" min="{{ min_price }}" max="{{ max_price }}" value="{{ selected_price|default:max_price }}"
                 oninput="result.value=this.value">
-                <output name="result" for="slider">{{ selected_price|default:0 }}</output>
+                <output name="result" for="slider">{{ selected_price|default:max_price }}</output>
             </div>
             <br>
             Діагональ екрану:<br>
@@ -86,7 +86,7 @@
             </div>
             <br>
             <div>
-                <input type="submit" value="Застосувати Фільтри">
+                <input type="submit" value="Застосувати Фільтри" class="btn">
             </div>
             </form>
        
