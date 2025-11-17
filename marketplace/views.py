@@ -20,6 +20,7 @@ def goods(request):
     cpus = saved_chars.cpus
     rams = saved_chars.rams
     ssds = saved_chars.ssds
+    min_price, max_price = saved_chars.min_price, saved_chars.max_price
     if request.method == "POST":
         list_m = request.POST.getlist('manufacturer')
         list_r = request.POST.getlist('ram')
@@ -55,6 +56,8 @@ def goods(request):
                                             'cpus': cpus,
                                             'rams': rams,
                                             'ssds': ssds,
+                                            'min_price': min_price,
+                                            'max_price': max_price,
 
                                             'selected_m': list_m,
                                             'selected_r': list_r,
@@ -70,7 +73,9 @@ def goods(request):
                                             'ipses': ipses,
                                             'cpus': cpus,
                                             'rams': rams,
-                                            'ssds': ssds,})
+                                            'ssds': ssds,
+                                            'min_price': min_price,
+                                            'max_price': max_price,})
     
 
 def single_good(request, good_id):

@@ -11,6 +11,8 @@ class SavedCharacteristics(models.Model):
     rams = models.JSONField(default=list, blank=True)
     ssds = models.JSONField(default=list, blank=True)
     manufacturers = models.JSONField(default=list, blank=True)
+    min_price = models.DecimalField(max_digits=10, decimal_places=2, default=10000000)
+    max_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
 class Good(models.Model):
     title = models.CharField(max_length=255, default="Some Piece of Scrap")
@@ -86,6 +88,13 @@ class Good(models.Model):
         ssd = self.characteristics['SSD']
         if ssd not in saved_chars.ssds:
             saved_chars.ssds.append(ssd)
+
+
+        if self.price < saved_chars.min_price:
+            saved_chars.min_price = round(self.price)
+
+        elif self.price > saved_chars.max_price:
+            saved_chars.max_price = round(self.price)
 
 
         saved_chars.save()

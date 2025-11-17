@@ -36,7 +36,7 @@
                 {% endfor %}
             <div>
                 <label for="price">Ціна:</label><br>
-                <input type="range" id="slider" name="slider" min="0" max="100000" value="{{ selected_price|default:0 }}"
+                <input type="range" id="slider" name="slider" min="{{ min_price }}" max="{{ max_price }}" value="{{ selected_price|default:0 }}"
                 oninput="result.value=this.value">
                 <output name="result" for="slider">{{ selected_price|default:0 }}</output>
             </div>
