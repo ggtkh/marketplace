@@ -180,3 +180,6 @@ ul {
     transform: scale(1.15);
     cursor: grabbing;
 }
+.img-div {
+    min-height: 190px;
+}

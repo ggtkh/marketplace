@@ -95,8 +95,9 @@
         {% if goods %}
             {% for good in goods %}
                 <div class='goods'>
+                    <div class='img-div'>
                     <a href={% url 'single_good' good.id %}><img src="{{good.main_picture}}" width='215px'><br></a>
-
+                    </div>
                     <a href={% url 'single_good' good.id %}><h5> {{ good.split_title|linebreaksbr }} </h5></a>
                     <h3 class='price'> {{good.price}} ₴ </h3>
                 </div>
