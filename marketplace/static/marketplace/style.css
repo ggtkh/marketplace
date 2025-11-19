@@ -20,7 +20,7 @@ p{
     background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%) no-repeat center center fixed;
 }
 .content{
-    max-width: 90%;
+    
     margin: 20px auto;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -28,18 +28,18 @@ p{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .main-content{
-    max-width: 90%;
+    width: 100vw;
     border-radius: 10px;
+    box-sizing: border-box;
 }
 .content2{
     display: inline-block;
     flex: 1;
-    /* width: 80% ;  */
-    min-width: 76.2%;
-    max-width: 76.2%;
-    /* min-width: 80.04%; */
+    flex: 0 0 85%;
     padding: 20px ;
     margin-top: 10px;
+    margin-left: 10px ;
+    max-width: calc(84.3% - 5px);
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -49,15 +49,14 @@ p{
     display: inline-block;
     vertical-align: top;
     max-height: 460px;
-    /* width: 14%; */
     padding: 20px;
+    max-width: 11%;
     margin-top: 10px ;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow-y: scroll;
     flex: 0 0 15%;
-
 }
 ul {
   list-style-type: none;
@@ -78,10 +77,11 @@ ul {
     text-decoration: none;
     color: black;
 }
-.maingage{
+.mainpage{
     display: flex;
     align-items: flex-start;
     width: 100%;
+
 }
 .voda{
     display: inline-block;
@@ -93,17 +93,7 @@ ul {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.good img {
-    float: left;
-    display: inline;
-    background-color: white;
-    border: black;
-    vertical-align: top;
-    border-radius: 10px;
-    margin-bottom: 7px;
-    padding: 5px;
-    min-height: 300px;
-}
+
 
 .btn {
     background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
@@ -180,6 +170,29 @@ ul {
     transform: scale(1.15);
     cursor: grabbing;
 }
-.img-div {
+.good img {
+    float: left;
+    display: block;
+    background-color: white;
+    border: black;
+    vertical-align: top;
+    margin-right: 2% ;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    padding: 5px;
+    min-height: 300px;
+}
+.img-div{
     min-height: 190px;
+}
+
+h2, .content p {
+    color: #000000;
+    text-align: center;
+}
+.about-us-contacts {
+    color: #000000;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
 }

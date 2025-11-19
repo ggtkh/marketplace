@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" >
-    <title>Головна</title>
+    <title>Товар</title>
     <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
     <link rel="icon" href="{% static 'marketplace/icon.png' %}" type="image/png">
 </head>
@@ -21,8 +21,12 @@
     <section class='mainpage'>
         <div class='voda'>
             <div class='good'>
+               <div class="image-div">
                 <img src={{good.main_picture}} width='350px'>
-                <h3> {{ good.title }} </h3>
+                </div> 
+                <div class="good-name">
+                    <h3>{{ good.title }} </h3>
+                </div>
             </div>
         </div>
     </section>
