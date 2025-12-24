@@ -34,6 +34,7 @@
                 <label for="{{ manufacturer }}"> {{manufacturer.upper}} </label><br>
                 
                 {% endfor %}
+            <br>
             <div>
                 <label for="price">Ціна, грн:</label><br>
                 <input type="range" id="slider" class="range-gradient" name="slider" min="{{ min_price }}" max="{{ max_price }}" value="{{ selected_price|default:max_price }}"
@@ -91,21 +92,24 @@
             </form>
        
         </div>
+        <div class="search-line"> {% comment "вот тут должна быть поисковая строка" %}{% endcomment %}
+            <h1>Hi</h1>
+        </div>
         <div class ="content2">
-        {% if goods %}
-            {% for good in goods %}
-                <div class='goods'>
-                    <div class='img-div'>
-                    <a href={% url 'single_good' good.id %}><img src="{{good.main_picture}}" width='215px'><br></a>
+            {% if goods %}
+                {% for good in goods %}
+                    <div class='goods'>
+                        <div class='img-div'>
+                        <a href={% url 'single_good' good.id %}><img src="{{good.main_picture}}" width='215px'><br></a>
+                        </div>
+                        <a href={% url 'single_good' good.id %}><h5> {{ good.split_title|linebreaksbr }} </h5></a>
+                        <h3 class='price'> {{good.price}} ₴ </h3>
                     </div>
-                    <a href={% url 'single_good' good.id %}><h5> {{ good.split_title|linebreaksbr }} </h5></a>
-                    <h3 class='price'> {{good.price}} ₴ </h3>
-                </div>
-                
-            {% endfor %}
-        {% else %}
-            <h2>Товарів не знайдено</h2>
-        {% endif %}
+                    
+                {% endfor %}
+            {% else %}
+                <h2>Товарів не знайдено</h2>
+            {% endif %}
         </div>
         </section>
 </body>

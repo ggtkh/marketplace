@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Good, SavedCharacteristics
+from .search_by_trigrams import search_by_name
 
 # Create your views here.
 
@@ -16,6 +17,7 @@ def goods(request):
     goods = Good.objects.all()
     saved_chars = SavedCharacteristics.objects.get(id=1)
     manufacturers = saved_chars.manufacturers
+
     ipses = saved_chars.ipses
     cpus = saved_chars.cpus
     rams = saved_chars.rams
