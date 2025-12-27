@@ -10,7 +10,7 @@
     background-color: rgba(141, 141, 141, 0.5);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
-    height: 25vh;
+    min-height: 25vh;
 }
 .navig a{
     color: white;

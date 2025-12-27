@@ -1,7 +1,7 @@
-book_name_list = ["The Great Gatsby", "To Kill a Mockingbird", "Harry Potter", "The Lord of the Rings"]
-kwords = "the gret mocingbird"
+# book_name_list = ["The Great Gatsby", "To Kill a Mockingbird", "Harry Potter", "The Lord of the Rings"]
+# kwords = "the gret mocingbird"
 
-book_name_list = [book_name.lower() for book_name in book_name_list]
+# book_name_list = [book_name.lower() for book_name in book_name_list]
 
 # print(book_name_list)
 
@@ -20,17 +20,31 @@ def compare_trigrams(name, string):
                 matches += 1
 
     # return (splitted_name, splitted_string, matches)
+    print(matches, string)
+
     return matches
 
-def search_by_name(list_of_names, string):
-    suitable_names = []
-    for name in list_of_names:
-        matches = compare_trigrams(name, string)
-        if matches >= 4:
-            suitable_names.append(name)
+def search_by_name(list_of_objs, string, match):
+    """_summary_
 
-    return suitable_names
+    Args:
+        list_of_names (list): list of strings
+        string (str): string to search
+        match (int): minimal quantity of mathces to pass search
+
+    Returns:
+        list: list of suitable objects
+    """
+    suitable_objs = []
+    for obj in list_of_objs:
+        name = str(obj.title).lower()
+        matches = compare_trigrams(name, string)
+        if matches >= match:
+            suitable_objs.append(obj)
+
+    print(suitable_objs)
+    return suitable_objs
 
 
 # print(compare_trigrams(book_name_list[2], kwords))
-print(search_by_name(book_name_list, kwords))
+# print(search_by_name(book_name_list, kwords))

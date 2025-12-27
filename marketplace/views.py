@@ -29,7 +29,10 @@ def goods(request):
         list_i = request.POST.getlist('ips')
         list_s = request.POST.getlist('ssd')
         list_c = request.POST.getlist('cpu')
+        
         selected_price = int(request.POST.get('slider'))
+        
+        search_text = str(request.POST.get('searching'))
 
         filtered_goods = []
         
@@ -48,6 +51,12 @@ def goods(request):
                 continue
 
             filtered_goods.append(good)
+
+        if search_text:
+            filtered_goods = search_by_name(filtered_goods, search_text, match=1)
+            print(filtered_goods)
+
+        print(request.POST.get('searching'))
 
         goods = filtered_goods
 
