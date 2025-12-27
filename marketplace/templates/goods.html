@@ -19,10 +19,14 @@
             <a href={% url 'about_us' %}>Про нас</a> 
         </nav>
     </div>
+        <div class="search">
+            <input type="text" id="searchbar" onkeyup="searchFunction()" placeholder="Пошук товарів...">
+            <input type="submit" value="Знайти" class="btn2">
+        </div>
         <section class="mainpage">
         <div class="filters">
             
-            <div><b>Фільтри</b> </div><br>
+            <div class="kakashke"><h3><b>♥ 🥵Фільтри😝 ♥</b></h3> </div><br>
             Виробник:<br>
             <form method="POST" action="">
                 {% csrf_token %}

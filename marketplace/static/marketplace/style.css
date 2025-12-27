@@ -1,3 +1,8 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 .navig{
     text-align: center;
     font-size: larger;
@@ -5,6 +10,7 @@
     background-color: rgba(141, 141, 141, 0.5);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
+    height: 25vh;
 }
 .navig a{
     color: white;
@@ -46,12 +52,10 @@ p{
 }
 .content2{
     display: inline-block;
-    flex: 1;
-    flex: 0 0 85%;
+    width: 85%;
     padding: 20px ;
     margin-top: 10px;
     margin-left: 8px ;
-    max-width: 76%;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -60,15 +64,12 @@ p{
     position: relative;
     display: inline-block;
     vertical-align: top;
-    max-height: 460px;
+
     padding: 20px;
-    min-width: 16.7%;
-    max-width: 17%;
     margin-top: 10px ;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow-y: scroll;
     flex: 0 0 15%;
 }
 ul {
@@ -208,4 +209,36 @@ h2, .content p {
     text-align: center;
     font-size: larger;
     font-weight: bold;
+}
+.kakashke{
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 5px;
+    text-align: center;
+}
+.search{
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-top: 10px;
+}
+.search input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.btn2{
+    padding: 10px;
+    width: calc(10% - 10px);
+    border: 2px #ffffff solid;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+}
+.btn2:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .35);
+    
 }
