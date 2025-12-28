@@ -18,17 +18,19 @@ def goods(request):
     saved_chars = SavedCharacteristics.objects.get(id=1)
     manufacturers = saved_chars.manufacturers
 
-    ipses = saved_chars.ipses
+    matrixes = saved_chars.matrixes
     cpus = saved_chars.cpus
+    gpus = saved_chars.gpus
     rams = saved_chars.rams
     ssds = saved_chars.ssds
     min_price, max_price = saved_chars.min_price, saved_chars.max_price
     if request.method == "POST":
         list_m = request.POST.getlist('manufacturer')
         list_r = request.POST.getlist('ram')
-        list_i = request.POST.getlist('ips')
+        list_mtx = request.POST.getlist('matrix')
         list_s = request.POST.getlist('ssd')
         list_c = request.POST.getlist('cpu')
+        list_g = request.POST.getlist('gpu')
         
         selected_price = int(request.POST.get('slider'))
         
@@ -41,11 +43,13 @@ def goods(request):
                 continue
             if list_r and good.characteristics['RAM'] not in list_r:
                 continue
-            if list_i and good.characteristics['IPS'] not in list_i:
+            if list_mtx and good.characteristics['matrix'] not in list_mtx:
                 continue
             if list_s and good.characteristics['SSD'] not in list_s:
                 continue
             if list_c and good.characteristics['CPU'] not in list_c:
+                continue
+            if list_g and good.characteristics['GPU'] not in list_g:
                 continue
             if selected_price and not good.price <= selected_price:
                 continue
@@ -63,8 +67,9 @@ def goods(request):
         return render(request, 'goods.html', {'goods': goods,
                                             'manufacturers': manufacturers,
 
-                                            'ipses': ipses,
+                                            'matrixes': matrixes,
                                             'cpus': cpus,
+                                            'gpus': gpus,
                                             'rams': rams,
                                             'ssds': ssds,
                                             'min_price': min_price,
@@ -72,17 +77,19 @@ def goods(request):
 
                                             'selected_m': list_m,
                                             'selected_r': list_r,
-                                            'selected_i': list_i,
+                                            'selected_mtx': list_mtx,
                                             'selected_s': list_s,
                                             'selected_c': list_c,
+                                            'selected_g': list_g,
                                             'selected_price': selected_price,
 
                                             'filtered_goods': filtered_goods},)
     else:
         return render(request, 'goods.html', {'goods': goods,
                                             'manufacturers': manufacturers,
-                                            'ipses': ipses,
+                                            'matrixes': matrixes,
                                             'cpus': cpus,
+                                            'gpus': gpus,
                                             'rams': rams,
                                             'ssds': ssds,
                                             'min_price': min_price,

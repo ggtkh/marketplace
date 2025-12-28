@@ -31,7 +31,7 @@
                         {% for key, value in good.characteristics.items %}
                             <tr>
                                 <td>{{ key }}</td>
-                                <td>{{ value }}</td>
+                                <td>{{ value }}{% if key == 'matrix' %}"{% endif %}</td>
                             </tr>
                         {% endfor %}
                     </table>

@@ -35,6 +35,7 @@ def search_by_name(list_of_objs, string, match):
     Returns:
         list: list of suitable objects
     """
+    string = string.lower()
     suitable_objs = []
     for obj in list_of_objs:
         name = str(obj.title).lower()

@@ -54,11 +54,11 @@
             <br>
             Діагональ екрану:<br>
             <div>
-                {% for ips in ipses %}  
-                <input type="checkbox" id="{{ ips }}" name="ips" value="{{ ips }}"
-                {% if ips in selected_i %}checked{% endif %} >
+                {% for matrix in matrixes %}  
+                <input type="checkbox" id="{{ matrix }}" name="matrix" value="{{ matrix }}"
+                {% if matrix in selected_mtx %}checked{% endif %} >
                 
-                <label for="{{ ips }}"> {{ ips }}" </label><br>
+                <label for="{{ matrix }}"> {{ matrix }}" </label><br>
                 
                 {% endfor %}
             </div>
@@ -70,6 +70,17 @@
                 {% if cpu in selected_c %}checked{% endif %} >
                 
                 <label for="{{ cpu }}"> {{ cpu }} </label><br>
+                
+                {% endfor %}
+            </div>
+            <br>
+            Відеокарти:<br>
+            <div>
+                {% for gpu in gpus %}  
+                <input type="checkbox" id="{{ gpu }}" name="gpu" value="{{ gpu }}"
+                {% if gpu in selected_g %}checked{% endif %} >
+                
+                <label for="{{ gpu }}"> {{ gpu }} </label><br>
                 
                 {% endfor %}
             </div>

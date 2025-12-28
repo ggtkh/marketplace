@@ -6,8 +6,9 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
 class SavedCharacteristics(models.Model):
-    ipses = models.JSONField(default=list, blank=True)
+    matrixes = models.JSONField(default=list, blank=True)
     cpus = models.JSONField(default=list, blank=True)
+    gpus = models.JSONField(default=list, blank=True)
     rams = models.JSONField(default=list, blank=True)
     ssds = models.JSONField(default=list, blank=True)
     manufacturers = models.JSONField(default=list, blank=True)
@@ -24,8 +25,9 @@ class Good(models.Model):
     pictures_list = models.JSONField(default=list, blank=True)
     hover_picture = models.URLField(blank=True, null=True)
     is_available = models.BooleanField()
-    characteristics = models.JSONField(default={"IPS": '0',
+    characteristics = models.JSONField(default={"matrix": '0',
                                                 "CPU": "",
+                                                "GPU": "",
                                                 "RAM": "0GB",
                                                 "SSD": "0GB"})
     tags = models.JSONField(default=list)
@@ -66,18 +68,23 @@ class Good(models.Model):
         # if len(self.characteristics['IPS']) > 2:
         #     self.characteristics['IPS'] = self.characteristics['IPS'][0:2]
 
-        if len(self.characteristics['IPS']) > 3 :
-            if self.characteristics['IPS'][2] == '.':
-                if self.characteristics['IPS'][0:4] not in saved_chars.ipses:
-                    saved_chars.ipses.append(self.characteristics['IPS'][0:4])
+        if len(self.characteristics['matrix']) > 3 :
+            if self.characteristics['matrix'][2] == '.':
+                if self.characteristics['matrix'][0:4] not in saved_chars.matrixes:
+                    saved_chars.matrixes.append(self.characteristics['matrix'][0:4])
 
-        elif self.characteristics['IPS'][0:2] not in saved_chars.ipses:
-            saved_chars.ipses.append(self.characteristics['IPS'][0:2])
+        elif self.characteristics['matrix'][0:2] not in saved_chars.matrixes:
+            saved_chars.matrixes.append(self.characteristics['matrix'][0:2])
         
         
         cpu = self.characteristics['CPU']
         if cpu not in saved_chars.cpus:
             saved_chars.cpus.append(cpu)
+
+
+        gpu = self.characteristics['GPU']
+        if gpu not in saved_chars.gpus:
+            saved_chars.gpus.append(gpu)
 
 
         ram = self.characteristics['RAM']
