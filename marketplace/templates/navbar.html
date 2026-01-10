@@ -1,11 +1,33 @@
-{% extends "goods.html" %}
+{% load static %}
 
-{% block navbar %}
-    <a href={% url 'index' %}><h1>Магазин</h1></a>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" >
+    <title>Товари</title>
+    <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
+    <link rel="icon" href="{% static 'marketplace/icon.png' %}" type="image/png">
+</head>
+<body class='body'>
+    <div class="navig">
+    <a href={% url 'goods' %}><h1>Магазин</h1></a> {% comment "Эта хрень на всю ширину экрана расселась Надо исправить" %}{% endcomment %}
+        {% if user.is_authenticated %}
+            <form method='post' action={% url 'logout' %}>
+                {% csrf_token %}
+                <button type='submit'>Вийти з акаунту</button>
+            </form>
+        {% else %}
+            <a href={% url "login" %}>Увійти в акаунт</a>
+            <a href={% url "register" %}>Зареєструватися</a>
+        {% endif %}
         <p>Найкращі товари по смішним цінам!</p>
         <nav>
-            <a href="main_page.html">Головна</a> |
-            <a href="goods.html">Товари</a> |
-            <a href="about_us.html">Про нас</a> 
+            <a href={% url 'index' %}>Головна</a> |
+            <a href={% url 'goods' %}>Товари</a> |
+            <a href={% url 'about_us' %}>Про нас</a> 
         </nav>
-{% endblock %}
+    </div>  
+    {% block content %}{% endblock content %}
+</body>
+</html>

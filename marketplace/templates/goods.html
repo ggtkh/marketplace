@@ -1,24 +1,8 @@
+{% extends "navbar.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" >
-    <title>Товари</title>
-    <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
-    <link rel="icon" href="{% static 'marketplace/icon.png' %}" type="image/png">
-</head>
-<body class ="body">
-    <div class="navig">
-    <a href={% url 'goods' %}><h1>Магазин</h1></a> {% comment "Эта хрень на всю ширину экрана расселась Надо исправить" %}{% endcomment %}
-        <p>Найкращі товари по смішним цінам!</p>
-        <nav>
-            <a href={% url 'index' %}>Головна</a> |
-            <a href={% url 'goods' %}>Товари</a> |
-            <a href={% url 'about_us' %}>Про нас</a> 
-        </nav>
-    </div>
+
+    {% block content %}
     <form method="POST" action="">
                 {% csrf_token %}
         <div class="search">
@@ -132,10 +116,5 @@
             {% endif %}
         </div>
         </section>
-</body>
-
-
-
-
-
-</html>
+    
+    {% endblock content %}
