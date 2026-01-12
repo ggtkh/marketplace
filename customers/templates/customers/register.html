@@ -3,11 +3,13 @@
 
 
 {% block content %}
+    <div class="content">
     <h2>Реєстрація</h2>
-    <form method="post">
+        <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Зареєструватися</button>
     </form>
     <p>Вже є акаунт? <a href="{% url 'login' %}">Увійти</a></p>
+    </div>
 {% endblock content %}

@@ -17,6 +17,10 @@
     text-decoration: none;
     margin: 0 15px;
     font-weight: bold;
+    display: inline-block;
+}
+.shop-link{
+    font-size: xx-large;
 }
 p{
     color: white;
@@ -26,7 +30,6 @@ p{
     background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%) no-repeat center center fixed;
 }
 .content{
-    
     margin: 20px auto;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -64,7 +67,6 @@ p{
     position: relative;
     display: inline-block;
     vertical-align: top;
-
     padding: 20px;
     margin-top: 10px ;
     background-color: rgba(255, 255, 255, 0.8);
@@ -90,6 +92,7 @@ ul {
 .goods a{
     text-decoration: none;
     color: black;
+    
 }
 .mainpage{
     display: flex;
@@ -246,4 +249,29 @@ h2, .content p {
     padding: 0;
     margin: 10px 0;
     text-align: left;
+}
+.btn3 {
+    background: none;
+    border: none;
+    color: white;
+    padding: 12px 18px;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 19px;
+}
+.content p, li{
+    font-size: 20px;
+    text-align: left;
+}
+.content h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #000000;
+}
+.main-text p {
+    text-align: center;
 }

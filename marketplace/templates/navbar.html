@@ -11,15 +11,17 @@
 </head>
 <body class='body'>
     <div class="navig">
-    <a href={% url 'goods' %}><h1>Магазин</h1></a> {% comment "Эта хрень на всю ширину экрана расселась Надо исправить" %}{% endcomment %}
+    <h1>
+        <a href={% url 'goods' %} class="shop-link">Магазин</a> 
+    </h1>
         {% if user.is_authenticated %}
             <form method='post' action={% url 'logout' %}>
                 {% csrf_token %}
-                <button type='submit'>Вийти з акаунту</button>
+                <button type='submit' class="btn3">Вийти з акаунту</button>
             </form>
         {% else %}
-            <a href={% url "login" %}>Увійти в акаунт</a>
-            <a href={% url "register" %}>Зареєструватися</a>
+            <a href={% url "login" %} class="btn3">Увійти в акаунт</a>
+            <a href={% url "register" %} class="btn3">Зареєструватися</a>
         {% endif %}
         <p>Найкращі товари по смішним цінам!</p>
         <nav>
