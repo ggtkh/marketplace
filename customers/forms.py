@@ -18,6 +18,14 @@ class RegisterForm(UserCreationForm):
                                                       'placeholder': 'Пароль'})
         self.fields['password2'].widget.attrs.update({'class': 'form-input', 
                                                       'placeholder': 'Повторіть пароль'})
+        
+        self.fields['username'].help_text = "Не більше 150 символів. Лише букви, цифри та @/./+/-/_"
+        self.fields['password2'].help_text = "Повторіть пароль для підтвердження."
+
+        self.fields['username'].label = "Ім'я користувача"
+        self.fields['email'].label = "Електронна адреса"
+        self.fields['password1'].label = "Пароль"
+        self.fields['password2'].label = "Підтвердження пароля"
 
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
@@ -26,3 +34,6 @@ class LoginForm(AuthenticationForm):
                                                     'placeholder': "І'мя користувача"})
         self.fields['password'].widget.attrs.update({'class': 'form-input', 
                                                      'placeholder': 'Пароль'})
+        
+        self.fields['username'].label = "Ім'я користувача"
+        self.fields['password'].label = "Пароль"
