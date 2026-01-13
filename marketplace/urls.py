@@ -8,4 +8,5 @@ urlpatterns = [
     path('goods/<int:good_id>/', views.single_good, name='single_good'),
     path('about_us/', views.about_us, name='about_us'),
     path('goods/<int:good_id>/edit/', views.edit_good, name='edit_good'),
+    path('goods/create_good/', views.create_good, name='create_good'),
 ]

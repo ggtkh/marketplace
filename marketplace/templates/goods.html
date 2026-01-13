@@ -38,11 +38,22 @@
             <br>
             Діагональ екрану:<br>
             <div>
-                {% for matrix in matrixes %}  
-                <input type="checkbox" id="{{ matrix }}" name="matrix" value="{{ matrix }}"
-                {% if matrix in selected_mtx %}checked{% endif %} >
+                {% for diagonal in diagonals %}  
+                <input type="checkbox" id="{{ diagonal }}" name="diagonal" value="{{ diagonal }}"
+                {% if diagoanl in selected_diagonals %}checked{% endif %} >
                 
-                <label for="{{ matrix }}"> {{ matrix }}" </label><br>
+                <label for="{{ diagonal }}"> {{ diagonal }}" </label><br>
+                
+                {% endfor %}
+            </div>
+            <br>
+            Частота оновлення екрану:<br>
+            <div>
+                {% for refresh_rate in refresh_rates %}  
+                <input type="checkbox" id="{{ refresh_rate }}" name="refresh_rate" value="{{ refresh_rate }}"
+                {% if refresh_rate in selected_refresh_rates %}checked{% endif %} >
+                
+                <label for="{{ refresh_rate }}"> {{ refresh_rate }} </label><br>
                 
                 {% endfor %}
             </div>
@@ -80,13 +91,13 @@
                 {% endfor %}
             </div>
             <br>
-            SSD:<br>
+            Накопичувач даних:<br>
             <div>
-                {% for ssd in ssds %}  
-                <input type="checkbox" id="{{ ssd }}" name="ssd" value="{{ ssd }}"
-                {% if ssd in selected_s %}checked{% endif %}>
+                {% for storage_capacity in storage_capacities %}  
+                <input type="checkbox" id="{{ storage_capacity }}" name="storage_capacity" value="{{ storage_capacity }}"
+                {% if storage_capacity in selected_storages %}checked{% endif %}>
                 
-                <label for="{{ ssd }}"> {{ ssd }} </label><br>
+                <label for="{{ storage_capacity }}"> {{ storage_capacity }} </label><br>
                 
                 {% endfor %}
             </div>
@@ -113,6 +124,10 @@
                 {% endfor %}
             {% else %}
                 <h2>Товарів не знайдено</h2>
+            {% endif %}
+            
+            {% if user.is_staff %}
+                <button class='btn2'><a href={% url 'create_good' %}>Додати товар</a></button>
             {% endif %}
         </div>
         </section>

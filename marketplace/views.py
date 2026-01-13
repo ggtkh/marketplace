@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Good, SavedCharacteristics
 from .search_by_trigrams import search_by_name
-from .forms import GoodForm
+from .forms import GoodEditForm, GoodCreateForm
 from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
@@ -20,17 +20,19 @@ def goods(request):
     saved_chars = SavedCharacteristics.objects.get(id=1)
     manufacturers = saved_chars.manufacturers
 
-    matrixes = saved_chars.matrixes
+    screen_diagonals = saved_chars.screen_diagonals
+    screen_refresh_rates = saved_chars.screen_refresh_rates
     cpus = saved_chars.cpus
     gpus = saved_chars.gpus
     rams = saved_chars.rams
-    ssds = saved_chars.ssds
+    storage_capacities = saved_chars.storage_capacities
     min_price, max_price = saved_chars.min_price, saved_chars.max_price
     if request.method == "POST":
         list_m = request.POST.getlist('manufacturer')
         list_r = request.POST.getlist('ram')
-        list_mtx = request.POST.getlist('matrix')
-        list_s = request.POST.getlist('ssd')
+        list_sd = request.POST.getlist('screen_diagonals')
+        list_srr = request.POST.getlist('screen_refresh_rates')
+        list_sc = request.POST.getlist('storage_capacities')
         list_c = request.POST.getlist('cpu')
         list_g = request.POST.getlist('gpu')
         
@@ -43,15 +45,17 @@ def goods(request):
         for good in goods:
             if list_m and good.manufacturer not in list_m:
                 continue
-            if list_r and good.characteristics['RAM'] not in list_r:
+            if list_r and good.RAM not in list_r:
                 continue
-            if list_mtx and good.characteristics['matrix'] not in list_mtx:
+            if list_sd and good.screen_diagonal not in list_sd:
                 continue
-            if list_s and good.characteristics['SSD'] not in list_s:
+            if list_srr and good.screen_refresh_rate not in list_srr:
                 continue
-            if list_c and good.characteristics['CPU'] not in list_c:
+            if list_sc and good.storage_capacity not in list_sc:
                 continue
-            if list_g and good.characteristics['GPU'] not in list_g:
+            if list_c and good.CPU not in list_c:
+                continue
+            if list_g and good.GPU not in list_g:
                 continue
             if selected_price and not good.price <= selected_price:
                 continue
@@ -69,18 +73,20 @@ def goods(request):
         return render(request, 'goods.html', {'goods': goods,
                                             'manufacturers': manufacturers,
 
-                                            'matrixes': matrixes,
+                                            'diagonals': screen_diagonals,
+                                            'refresh_rates': screen_refresh_rates,
                                             'cpus': cpus,
                                             'gpus': gpus,
                                             'rams': rams,
-                                            'ssds': ssds,
+                                            'storage_capacities': storage_capacities,
                                             'min_price': min_price,
                                             'max_price': max_price,
 
                                             'selected_m': list_m,
                                             'selected_r': list_r,
-                                            'selected_mtx': list_mtx,
-                                            'selected_s': list_s,
+                                            'selected_diagonals': list_sd,
+                                            'selected_refresh_rates': list_srr,
+                                            'selected_storages': list_sc,
                                             'selected_c': list_c,
                                             'selected_g': list_g,
                                             'selected_price': selected_price,
@@ -89,11 +95,12 @@ def goods(request):
     else:
         return render(request, 'goods.html', {'goods': goods,
                                             'manufacturers': manufacturers,
-                                            'matrixes': matrixes,
+                                            'diagonals': screen_diagonals,
+                                            'refresh_rates': screen_refresh_rates,
                                             'cpus': cpus,
                                             'gpus': gpus,
                                             'rams': rams,
-                                            'ssds': ssds,
+                                            'storage_capacities': storage_capacities,
                                             'min_price': min_price,
                                             'max_price': max_price,})
     
@@ -108,12 +115,24 @@ def edit_good(request, good_id):
     good = Good.objects.get(id=good_id)
 
     if request.method == 'POST':
-        form = GoodForm(request.POST, instance=good)
+        form = GoodEditForm(request.POST, instance=good)
         if form.is_valid():
             form.save()
             redirect('single_good', good_id=good_id)
     else:
-        form = GoodForm(instance=good)
+        form = GoodEditForm(instance=good)
 
     return render(request, 'edit_single_good.html', {'form': form,
                                                      'good_id': good_id,})
+
+@staff_member_required
+def create_good(request):
+    if request.method == 'POST':
+        form = GoodCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            good = form.save()
+            return redirect('single_good', good_id=good.id)
+    else:
+        form = GoodCreateForm()
+    
+    return render(request, 'create_good.html', {'form': form,})

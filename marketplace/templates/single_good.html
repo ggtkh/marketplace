@@ -10,14 +10,15 @@
                 </div> 
                 <div class="good-name">
                     <h3>{{ good.title }} </h3>
+                    <h4>Виробник: {{ good.manufacturer }} </h4>
                     <h3>Характеристики</h3>
                     <table>
-                        {% for key, value in good.characteristics.items %}
-                            <tr>
-                                <td>{{ key }}</td>
-                                <td>{{ value }}{% if key == 'matrix' %}"{% endif %}</td>
-                            </tr>
-                        {% endfor %}
+                        <i>Діагональ екрану: {{ good.screen_diagonal }}"</i><br>
+                        <i>Частота оновлення екрану: {{ good.screen_refresh_rate }} </i><br>
+                        <i>Процесор: {{ good.CPU }} </i><br>
+                        <i>Відеокарта: {{ good.GPU }} </i><br>
+                        <i>Оперативна пам'ять: {{ good.RAM }} </i><br>
+                        <i>Об'єм накопичувача: {{ good.storage_capacity }} </i><br>
                     </table>
                     <h3>Ціна: {{ good.price }} ₴</h3>
                     {% if user.is_staff %}
