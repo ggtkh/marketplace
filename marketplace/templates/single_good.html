@@ -20,6 +20,9 @@
                         {% endfor %}
                     </table>
                     <h3>Ціна: {{ good.price }} ₴</h3>
+                    {% if user.is_staff %}
+                        <button class='btn'><a style="text-decoration: none;" href={% url 'edit_good' good.id %}>Редагувати</a></button>
+                    {% endif %}
                 </div>
             </div>
         </div>

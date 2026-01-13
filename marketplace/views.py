@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Good, SavedCharacteristics
 from .search_by_trigrams import search_by_name
+from .forms import GoodForm
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 
@@ -100,3 +102,18 @@ def single_good(request, good_id):
     good = Good.objects.get(id=good_id)
     return render(request, 'single_good.html', {'good': good},)
 
+
+@staff_member_required
+def edit_good(request, good_id):
+    good = Good.objects.get(id=good_id)
+
+    if request.method == 'POST':
+        form = GoodForm(request.POST, instance=good)
+        if form.is_valid():
+            form.save()
+            redirect('single_good', good_id=good_id)
+    else:
+        form = GoodForm(instance=good)
+
+    return render(request, 'edit_single_good.html', {'form': form,
+                                                     'good_id': good_id,})

@@ -17,11 +17,12 @@
         {% if user.is_authenticated %}
             <form method='post' action={% url 'logout' %}>
                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
                 <button type='submit' class="btn3">Вийти з акаунту</button>
             </form>
         {% else %}
-            <a href={% url "login" %} class="btn3">Увійти в акаунт</a>
-            <a href={% url "register" %} class="btn3">Зареєструватися</a>
+            <a href="{% url "login" %}?next={{ request.path }}" class="btn3">Увійти в акаунт</a>
+            <a href="{% url "register" %}?next={{ request.path }}" class="btn3">Зареєструватися</a>
         {% endif %}
         <p>Найкращі товари по смішним цінам!</p>
         <nav>
