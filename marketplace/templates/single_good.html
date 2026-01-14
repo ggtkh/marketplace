@@ -5,8 +5,8 @@
     <section class='mainpage'>
         <div class='voda'>
             <div class='good'>
-               <div class="image-div">
-                <img src={{good.main_picture}} width='350px'>
+                <div class="image-div">
+                    <img src={{good.main_picture}} width='350px'>
                 </div> 
                 <div class="good-name">
                     <h3>{{ good.title }} </h3>
@@ -21,8 +21,21 @@
                         <i>Об'єм накопичувача: {{ good.storage_capacity }} </i><br>
                     </table>
                     <h3>Ціна: {{ good.price }} ₴</h3>
+                    
+                </div>
+                <div>
                     {% if user.is_staff %}
-                        <button class='btn'><a style="text-decoration: none;" href={% url 'edit_good' good.id %}>Редагувати</a></button>
+                        <form method='POST' action="{% url 'edit_good' good.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type='submit' class="btn" >Редагувати</button>
+                        </form>
+                        <form method='POST' action="{% url 'delete_good' good.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type='submit' class='btn btn-danger'
+                                    onclick="return confirm('Ви впевнені, що хочете виділити цей товар?')">
+                                Видалити
+                            </button>
+                        </form>
                     {% endif %}
                 </div>
             </div>

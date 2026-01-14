@@ -18,9 +18,6 @@
             
             <div class="kakashke"><h3><b>♥ 🥵Фільтри😝 ♥</b></h3> </div><br>
             Виробник:<br>
-            {% comment %} <form method="POST" action="">
-                {% csrf_token %} {% endcomment %}
-
                 {% for manufacturer in manufacturers %}  
                 <input type="checkbox" id="{{ manufacturer }}" name="manufacturer" value="{{ manufacturer }}"
                 {% if manufacturer in selected_m %}checked{% endif %} >
@@ -39,8 +36,8 @@
             Діагональ екрану:<br>
             <div>
                 {% for diagonal in diagonals %}  
-                <input type="checkbox" id="{{ diagonal }}" name="diagonal" value="{{ diagonal }}"
-                {% if diagoanl in selected_diagonals %}checked{% endif %} >
+                <input type="checkbox" id="{{ diagonal }}" name="screen_diagonal" value="{{ diagonal }}"
+                {% if diagonal in selected_diagonals %}checked{% endif %} >
                 
                 <label for="{{ diagonal }}"> {{ diagonal }}" </label><br>
                 
@@ -50,7 +47,7 @@
             Частота оновлення екрану:<br>
             <div>
                 {% for refresh_rate in refresh_rates %}  
-                <input type="checkbox" id="{{ refresh_rate }}" name="refresh_rate" value="{{ refresh_rate }}"
+                <input type="checkbox" id="{{ refresh_rate }}" name="screen_refresh_rate" value="{{ refresh_rate }}"
                 {% if refresh_rate in selected_refresh_rates %}checked{% endif %} >
                 
                 <label for="{{ refresh_rate }}"> {{ refresh_rate }} </label><br>
@@ -104,13 +101,17 @@
             <br>
             <div>
                 <input type="submit" value="Застосувати Фільтри" class="btn">
-            </div>
-            {% comment %} </form> {% endcomment %}
-       
+            </div>      
         </div>
     </form>
         
         <div class ="content2">
+            <div>
+                <form action="{% url 'goods' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn2" style="margin-bottom: 5px; width: 200px; box-shadow: none;">Прибрати Фільтри</button>
+                </form>
+            </div>
             {% if goods %}
                 {% for good in goods %}
                     <div class='goods'>
@@ -127,7 +128,11 @@
             {% endif %}
             
             {% if user.is_staff %}
-                <button class='btn2'><a href={% url 'create_good' %}>Додати товар</a></button>
+                <div>
+                    <form action="{% url 'create_good' %}">
+                        <button class='btn2' type='submit'>Додати товар</button>
+                    </form>
+                </div>
             {% endif %}
         </div>
         </section>

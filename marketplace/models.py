@@ -105,11 +105,81 @@ class Good(models.Model):
 
         saved_chars.save()
 
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
+        
+        saved_chars, created = SavedCharacteristics.objects.get_or_create(id=1)
+        
+        # Один запрос для получения всех товаров
+        all_goods = Good.objects.all()
+        
+        if not all_goods.exists():
+            # Если товаров не осталось, очищаем все
+            saved_chars.manufacturers = []
+            saved_chars.screen_diagonals = []
+            saved_chars.screen_refresh_rates = []
+            saved_chars.cpus = []
+            saved_chars.gpus = []
+            saved_chars.rams = []
+            saved_chars.storage_capacities = []
+            saved_chars.min_price = 0
+            saved_chars.max_price = 0
+            saved_chars.save()
+            return
+        
+        # Пересчитываем все характеристики
+        manufacturers = set()
+        screen_diagonals = set()
+        screen_refresh_rates = set()
+        cpus = set()
+        gpus = set()
+        rams = set()
+        storage_capacities = set()
+        prices = []
+        
+        for good in all_goods:
+            if good.manufacturer:
+                manufacturers.add(good.manufacturer)
+            
+            # Диагональ экрана
+            if len(good.screen_diagonal) > 3 and good.screen_diagonal[2] == '.':
+                screen_diagonals.add(good.screen_diagonal[0:4])
+            elif len(good.screen_diagonal) >= 2:
+                screen_diagonals.add(good.screen_diagonal[0:2])
+            
+            if good.screen_refresh_rate:
+                screen_refresh_rates.add(good.screen_refresh_rate)
+            
+            if good.CPU:
+                cpus.add(good.CPU)
+            
+            if good.GPU:
+                gpus.add(good.GPU)
+            
+            if good.RAM:
+                rams.add(good.RAM)
+            
+            if good.storage_capacity:
+                storage_capacities.add(good.storage_capacity)
+            
+            prices.append(good.price)
+        
+        # Обновляем saved_chars
+        saved_chars.manufacturers = list(manufacturers)
+        saved_chars.screen_diagonals = list(screen_diagonals)
+        saved_chars.screen_refresh_rates = list(screen_refresh_rates)
+        saved_chars.cpus = list(cpus)
+        saved_chars.gpus = list(gpus)
+        saved_chars.rams = list(rams)
+        saved_chars.storage_capacities = list(storage_capacities)
+        saved_chars.min_price = round(min(prices)) if prices else 0
+        saved_chars.max_price = round(max(prices)) if prices else 0
+        
+        saved_chars.save()
 
-    def __str__(self):
-        return self.title
 
-
+        def __str__(self):
+            return self.title
 
 class Review(models.Model):
     author = models.CharField(max_length=20)

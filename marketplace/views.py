@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Good, SavedCharacteristics
 from .search_by_trigrams import search_by_name
@@ -30,9 +30,9 @@ def goods(request):
     if request.method == "POST":
         list_m = request.POST.getlist('manufacturer')
         list_r = request.POST.getlist('ram')
-        list_sd = request.POST.getlist('screen_diagonals')
-        list_srr = request.POST.getlist('screen_refresh_rates')
-        list_sc = request.POST.getlist('storage_capacities')
+        list_sd = request.POST.getlist('screen_diagonal')
+        list_srr = request.POST.getlist('screen_refresh_rate')
+        list_sc = request.POST.getlist('storage_capacity')
         list_c = request.POST.getlist('cpu')
         list_g = request.POST.getlist('gpu')
         
@@ -105,6 +105,9 @@ def goods(request):
                                             'max_price': max_price,})
     
 
+def clear_filters(request):
+    return redirect('goods')
+
 def single_good(request, good_id):
     good = Good.objects.get(id=good_id)
     return render(request, 'single_good.html', {'good': good},)
@@ -112,18 +115,19 @@ def single_good(request, good_id):
 
 @staff_member_required
 def edit_good(request, good_id):
-    good = Good.objects.get(id=good_id)
+    good = get_object_or_404(Good, id=good_id)
 
     if request.method == 'POST':
         form = GoodEditForm(request.POST, instance=good)
         if form.is_valid():
             form.save()
-            redirect('single_good', good_id=good_id)
+            return redirect('single_good', good_id=good_id)
     else:
         form = GoodEditForm(instance=good)
 
     return render(request, 'edit_single_good.html', {'form': form,
-                                                     'good_id': good_id,})
+                                                     'good_id': good_id,
+                                                     'good': good,})
 
 @staff_member_required
 def create_good(request):
@@ -136,3 +140,14 @@ def create_good(request):
         form = GoodCreateForm()
     
     return render(request, 'create_good.html', {'form': form,})
+
+
+@staff_member_required
+def delete_good(request, good_id):
+    good = get_object_or_404(Good, id=good_id)
+
+    if request.method == "POST":
+        good.delete()
+        return redirect('goods')
+    
+    return render(request, 'delete_good.html', {'good': good,})
