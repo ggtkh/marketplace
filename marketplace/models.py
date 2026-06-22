@@ -13,13 +13,13 @@ class SavedCharacteristics(models.Model):
     rams = models.JSONField(default=list, blank=True)
     storage_capacities = models.JSONField(default=list, blank=True)
     manufacturers = models.JSONField(default=list, blank=True)
-    min_price = models.IntegerField(max_length=8, default=10000000)
-    max_price = models.IntegerField(max_length=8, default=0)
+    min_price = models.IntegerField(default=10000000)
+    max_price = models.IntegerField(default=0)
 
 class Good(models.Model):
     title = models.CharField(max_length=255, default="Some Piece of Scrap")
     description = models.CharField(max_length=500, blank=True)
-    price = models.IntegerField(max_length=8)
+    price = models.IntegerField()
     manufacturer = models.CharField(max_length=20, default=None)
     posted_at = models.DateField(default=timezone.now)
     main_picture = models.URLField()
