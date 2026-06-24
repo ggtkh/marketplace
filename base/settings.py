@@ -124,10 +124,10 @@ STATIC_URL = '/static/'
 
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 if DEBUG:
     STATICFILES_DIRS = [BASE_DIR / 'static']
-else:
-    STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

@@ -28,6 +28,7 @@ p{
 }
 .body{
     background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%) no-repeat center center fixed;
+    padding: calc(8/144*5*1vw);
 }
 .content{
     margin: 20px auto;
@@ -56,7 +57,7 @@ p{
 .content2{
     display: inline-block;
     width: 85%;
-    padding: 20px ;
+    padding: calc(9.4/144*20*1vw);
     margin-top: 10px;
     margin-left: 8px ;
     background-color: rgba(255, 255, 255, 0.8);
@@ -70,7 +71,7 @@ p{
     /* остальное без изменений */
     display: inline-block;
     vertical-align: top;
-    padding: 20px;
+    padding: calc(8/144*20*1vw);
     margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
@@ -89,7 +90,7 @@ ul {
     vertical-align: top;
     border-radius: 10px;
     margin-bottom: 7px;
-    padding: 5px;
+    padding: calc(8/144*5*1vw);
     min-height: 300px;
     /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
@@ -203,7 +204,7 @@ ul {
     margin-right: 2% ;
     border-radius: 10px;
     margin-bottom: 7px;
-    padding: 5px;
+    padding: calc(8/144*5*1vw);
     /* Минимальные размеры */
     min-width: 200px;
     min-height: 150px;
