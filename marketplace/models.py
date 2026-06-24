@@ -34,17 +34,17 @@ class Good(models.Model):
     storage_capacity = models.CharField(max_length=100, default='0GB')
     tags = models.JSONField(default=list, blank=True)
     reviews = models.JSONField(default=list, blank=True)
-    
 
-    def split_title(self):
-        if len(self.title) < 30:
+
+    def split_title(self): # добавить зависимость от передаваемых параметров экрана
+        if len(self.title) < 40:
             return self.title
         else:
             words = self.title.split()
             lines = []
             current = ""
             for word in words:
-                if len(current + word + " ") < 30:
+                if len(current + word + " ") < 40:
                     current += word + " "
                 else:
                     lines.append(current)
@@ -53,8 +53,9 @@ class Good(models.Model):
                     return "\n".join(lines) + "..."
             if current:
                 lines.append(current)
+
             return "\n".join(lines)
-        
+
     def save(self, *args, **kwargs):
         if not self.hover_picture:
             self.hover_picture = self.main_picture
@@ -76,7 +77,7 @@ class Good(models.Model):
 
         elif self.screen_diagonal[0:2] not in saved_chars.screen_diagonals:
             saved_chars.screen_diagonals.append(self.screen_diagonal[0:2])
-        
+
         if self.screen_refresh_rate not in saved_chars.screen_refresh_rates:
             saved_chars.screen_refresh_rates.append(self.screen_refresh_rate)
 
@@ -107,12 +108,12 @@ class Good(models.Model):
 
     def delete(self, *args, **kwargs):
         super().delete(*args, **kwargs)
-        
+
         saved_chars, created = SavedCharacteristics.objects.get_or_create(id=1)
-        
+
         # Один запрос для получения всех товаров
         all_goods = Good.objects.all()
-        
+
         if not all_goods.exists():
             # Если товаров не осталось, очищаем все
             saved_chars.manufacturers = []
@@ -126,7 +127,7 @@ class Good(models.Model):
             saved_chars.max_price = 0
             saved_chars.save()
             return
-        
+
         # Пересчитываем все характеристики
         manufacturers = set()
         screen_diagonals = set()
@@ -136,34 +137,34 @@ class Good(models.Model):
         rams = set()
         storage_capacities = set()
         prices = []
-        
+
         for good in all_goods:
             if good.manufacturer:
                 manufacturers.add(good.manufacturer)
-            
+
             # Диагональ экрана
             if len(good.screen_diagonal) > 3 and good.screen_diagonal[2] == '.':
                 screen_diagonals.add(good.screen_diagonal[0:4])
             elif len(good.screen_diagonal) >= 2:
                 screen_diagonals.add(good.screen_diagonal[0:2])
-            
+
             if good.screen_refresh_rate:
                 screen_refresh_rates.add(good.screen_refresh_rate)
-            
+
             if good.CPU:
                 cpus.add(good.CPU)
-            
+
             if good.GPU:
                 gpus.add(good.GPU)
-            
+
             if good.RAM:
                 rams.add(good.RAM)
-            
+
             if good.storage_capacity:
                 storage_capacities.add(good.storage_capacity)
-            
+
             prices.append(good.price)
-        
+
         # Обновляем saved_chars
         saved_chars.manufacturers = list(manufacturers)
         saved_chars.screen_diagonals = list(screen_diagonals)
@@ -174,7 +175,7 @@ class Good(models.Model):
         saved_chars.storage_capacities = list(storage_capacities)
         saved_chars.min_price = round(min(prices)) if prices else 0
         saved_chars.max_price = round(max(prices)) if prices else 0
-        
+
         saved_chars.save()
 
 
@@ -187,4 +188,3 @@ class Review(models.Model):
     rating = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
-    

@@ -41,7 +41,7 @@ p{
     border-radius: 10px;
     box-sizing: border-box;
 }
-.search-line{ 
+.search-line{
     display: inline-block;
     flex: 1;
     flex: 0 0 85%;
@@ -63,12 +63,15 @@ p{
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.filters{
-    position: relative;
+.filters {
+    position: sticky;
+    top: 10px; /* отступ от верха при прокрутке */
+    
+    /* остальное без изменений */
     display: inline-block;
     vertical-align: top;
     padding: 20px;
-    margin-top: 10px ;
+    margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -88,17 +91,25 @@ ul {
     margin-bottom: 7px;
     padding: 5px;
     min-height: 300px;
+    /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
+
+.goods:hover {
+    /* transform: translateY(-3px); */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .25);
+    /* filter: brightness(1.15); подсветка при наведении */
+}
+
 .goods a{
     text-decoration: none;
     color: black;
-    
+
 }
 .mainpage{
     display: flex;
     align-items: flex-start;
     width: 100%;
-
+    min-height: 100vh;
 }
 .voda{
     display: inline-block;
@@ -195,9 +206,23 @@ ul {
     border-radius: 10px;
     margin-bottom: 7px;
     padding: 5px;
-    min-height: 300px;
+    /* Минимальные размеры */
+    min-width: 200px;
+    min-height: 150px;
+
+    /* Максимальные размеры */
+    max-width: 215px;
+    max-height: 190px;
+
+    /* Обязательно для адаптивности */
+    width: 100%;
+    height: 100%;
+
+    /* Чтобы картинка не искажалась, а заполняла блок аккуратно */
+    object-fit: contain;
 }
 .img-div{
+    max-height: 190px;
     min-height: 190px;
 }
 
@@ -224,7 +249,7 @@ h2, .content p {
     margin-top: 10px;
 }
 .search input[type="text"] {
-    width: 90%;
+    width: calc(100% - 114px);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -232,7 +257,7 @@ h2, .content p {
 }
 .btn2{
     padding: 10px;
-    width: calc(10% - 10px);
+    width: 110px;
     border: 2px #ffffff solid;
     border-radius: 5px;
     background-color: rgb(255, 255, 255);

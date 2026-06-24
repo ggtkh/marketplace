@@ -3,27 +3,27 @@
 
 
     {% block content %}
-    <form method="POST" action="">
+    <form method="POST" action="" style="min-height: 100vh;width:100%;">
                 {% csrf_token %}
         <div class="search">
             {% comment %} <form method="POST" action="">
                 {% csrf_token %} {% endcomment %}
-                
+
                 <input type="text" name="searching" id="searching" placeholder="Пошук товарів...">
                 <input type="submit" value="Знайти" class="btn2">
             {% comment %} </form> {% endcomment %}
         </div>
         <section class="mainpage">
         <div class="filters">
-            
-            <div class="kakashke"><h3><b>♥ 🥵Фільтри😝 ♥</b></h3> </div><br>
+
+            <div class="kakashke"><h3><b>Фільтри</b></h3> </div><br>
             Виробник:<br>
-                {% for manufacturer in manufacturers %}  
+                {% for manufacturer in manufacturers %}
                 <input type="checkbox" id="{{ manufacturer }}" name="manufacturer" value="{{ manufacturer }}"
                 {% if manufacturer in selected_m %}checked{% endif %} >
-                    
+
                 <label for="{{ manufacturer }}"> {{manufacturer.upper}} </label><br>
-                
+
                 {% endfor %}
             <br>
             <div>
@@ -35,76 +35,76 @@
             <br>
             Діагональ екрану:<br>
             <div>
-                {% for diagonal in diagonals %}  
+                {% for diagonal in diagonals %}
                 <input type="checkbox" id="{{ diagonal }}" name="screen_diagonal" value="{{ diagonal }}"
                 {% if diagonal in selected_diagonals %}checked{% endif %} >
-                
+
                 <label for="{{ diagonal }}"> {{ diagonal }}" </label><br>
-                
+
                 {% endfor %}
             </div>
             <br>
             Частота оновлення екрану:<br>
             <div>
-                {% for refresh_rate in refresh_rates %}  
+                {% for refresh_rate in refresh_rates %}
                 <input type="checkbox" id="{{ refresh_rate }}" name="screen_refresh_rate" value="{{ refresh_rate }}"
                 {% if refresh_rate in selected_refresh_rates %}checked{% endif %} >
-                
+
                 <label for="{{ refresh_rate }}"> {{ refresh_rate }} </label><br>
-                
+
                 {% endfor %}
             </div>
             <br>
             Процесори:<br>
             <div>
-                {% for cpu in cpus %}  
+                {% for cpu in cpus %}
                 <input type="checkbox" id="{{ cpu }}" name="cpu" value="{{ cpu }}"
                 {% if cpu in selected_c %}checked{% endif %} >
-                
+
                 <label for="{{ cpu }}"> {{ cpu }} </label><br>
-                
+
                 {% endfor %}
             </div>
             <br>
             Відеокарти:<br>
             <div>
-                {% for gpu in gpus %}  
+                {% for gpu in gpus %}
                 <input type="checkbox" id="{{ gpu }}" name="gpu" value="{{ gpu }}"
                 {% if gpu in selected_g %}checked{% endif %} >
-                
+
                 <label for="{{ gpu }}"> {{ gpu }} </label><br>
-                
+
                 {% endfor %}
             </div>
             <br>
             Оперативна пам'ять:<br>
             <div>
-                {% for ram in rams %}  
+                {% for ram in rams %}
                 <input type="checkbox" id="{{ ram }}" name="ram" value="{{ ram }}"
                 {% if ram in selected_r %}checked{% endif %} >
-                
+
                 <label for="{{ ram }}"> {{ ram }} </label><br>
-                
+
                 {% endfor %}
             </div>
             <br>
             Накопичувач даних:<br>
             <div>
-                {% for storage_capacity in storage_capacities %}  
+                {% for storage_capacity in storage_capacities %}
                 <input type="checkbox" id="{{ storage_capacity }}" name="storage_capacity" value="{{ storage_capacity }}"
                 {% if storage_capacity in selected_storages %}checked{% endif %}>
-                
+
                 <label for="{{ storage_capacity }}"> {{ storage_capacity }} </label><br>
-                
+
                 {% endfor %}
             </div>
             <br>
             <div>
                 <input type="submit" value="Застосувати Фільтри" class="btn">
-            </div>      
+            </div>
         </div>
     </form>
-        
+
         <div class ="content2">
             <div>
                 <form action="{% url 'goods' %}">
@@ -116,17 +116,25 @@
                 {% for good in goods %}
                     <div class='goods'>
                         <div class='img-div'>
-                        <a href={% url 'single_good' good.id %}><img src="{{good.main_picture}}" width='215px'><br></a>
+                        <a href={% url 'single_good' good.id %}><img src="{{good.main_picture}}" style='
+                                                                                                        min-width:18.4rem;
+                                                                                                        min-height:150px;
+                                                                                                        max-width:18.4rem;
+                                                                                                        max-height:200px;
+                                                                                                        width:100%;
+                                                                                                        height:100%;
+                                                                                                        object-fit:contain;
+                                                                                                        '> <br></a>
                         </div>
-                        <a href={% url 'single_good' good.id %}><h5> {{ good.split_title|linebreaksbr }} </h5></a>
+                        <a href={% url 'single_good' good.id %}><h5 style="min-height: 32px;"> {{ good.split_title|linebreaksbr }}</h5></a>
                         <h3 class='price'> {{good.price}} ₴ </h3>
                     </div>
-                    
+
                 {% endfor %}
             {% else %}
                 <h2>Товарів не знайдено</h2>
             {% endif %}
-            
+
             {% if user.is_staff %}
                 <div>
                     <form action="{% url 'create_good' %}">
@@ -136,5 +144,5 @@
             {% endif %}
         </div>
         </section>
-    
+
     {% endblock content %}
